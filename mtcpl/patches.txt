@@ -4,3 +4,6 @@
 
 [post_model_sync]
 # Patches added in this section will be executed after doctypes are migrated
+mtcpl.patches.v1_0.setup_short_leave
+mtcpl.patches.v1_0.short_leave_application_as_data
+mtcpl.patches.v1_0.short_leave_hours

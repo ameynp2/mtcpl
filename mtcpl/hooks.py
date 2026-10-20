@@ -242,3 +242,23 @@ app_license = "mit"
 # 	"Logging DocType Name": 30  # days to retain logs
 # }
 
+
+# Short Leave + Half Day customization
+# ------------------------------------
+override_doctype_class = {
+	"Leave Application": "mtcpl.overrides.leave_application.CustomLeaveApplication",
+	"Shift Type": "mtcpl.overrides.shift_type.CustomShiftType",
+}
+
+doctype_js = {"Leave Application": "public/js/leave_application.js"}
+
+doc_events = {
+	"Attendance": {"on_submit": "mtcpl.api.short_leave.flag_short_leave_on_attendance"},
+}
+
+scheduler_events = {
+	# idempotent: skips employees who already have this month's allocation
+	"cron": {
+		"30 0 * * *": ["mtcpl.api.short_leave.allocate_monthly_short_leave"],
+	},
+}
