@@ -262,3 +262,30 @@ scheduler_events = {
 		"30 0 * * *": ["mtcpl.api.short_leave.allocate_monthly_short_leave"],
 	},
 }
+
+# Short Leave customization
+fixtures = [
+	{
+		"dt": "Custom Field",
+		"filters": [
+			[
+				"name",
+				"in",
+				[
+					"Leave Type-custom_is_monthly_allocated",
+					"Leave Type-custom_number_of_leaves_per_month_",
+					"Leave Application-custom_short_leave",
+					"Leave Application-custom_short_leave_date",
+					"Leave Application-custom_short_leave_section",
+					"Leave Application-custom_short_leave_from_time",
+					"Leave Application-custom_short_leave_to_time",
+					"Leave Application-custom_short_leave_hours",
+					"Attendance-custom_short_leave_applied",
+					"Attendance-custom_short_leave_hours",
+					"Attendance-custom_short_leave_source",
+					"Attendance-custom_short_leave_application",
+				],
+			]
+		],
+	},
+]
