@@ -260,6 +260,9 @@ scheduler_events = {
 	# idempotent: skips employees who already have this month's allocation
 	"cron": {
 		"30 0 * * *": ["mtcpl.api.short_leave.allocate_monthly_short_leave"],
+		# hold attendance until next-morning biometric sync has had time to arrive
+		"0 13 * * *": ["mtcpl.api.attendance_sync.set_attendance_cutoff"],
+		"30 * * * *": ["mtcpl.api.attendance_sync.reconcile_late_checkins"],
 	},
 }
 
