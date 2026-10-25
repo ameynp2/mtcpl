@@ -7,3 +7,4 @@
 mtcpl.patches.v1_0.setup_short_leave
 mtcpl.patches.v1_0.short_leave_application_as_data
 mtcpl.patches.v1_0.short_leave_hours
+mtcpl.patches.v1_0.attendance_review_fields
