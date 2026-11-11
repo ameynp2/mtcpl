@@ -26,7 +26,9 @@ app_license = "mit"
 
 # include js, css files in header of desk.html
 # app_include_css = "/assets/mtcpl/css/mtcpl.css"
-# app_include_js = "/assets/mtcpl/js/mtcpl.js"
+app_include_js = "/assets/mtcpl/js/employee_landing.js"
+
+boot_session = "mtcpl.api.employee_dashboard.set_landing_page"
 
 # include js, css files in header of web template
 # web_include_css = "/assets/mtcpl/css/mtcpl.css"
@@ -254,6 +256,8 @@ doctype_js = {"Leave Application": "public/js/leave_application.js"}
 
 doc_events = {
 	"Attendance": {"on_submit": "mtcpl.api.short_leave.flag_short_leave_on_attendance"},
+	"Payroll Entry": {"validate": "mtcpl.api.attendance_review.check_payroll_entry"},
+	"Salary Slip": {"validate": "mtcpl.api.attendance_review.check_salary_slip"},
 }
 
 scheduler_events = {
@@ -263,6 +267,7 @@ scheduler_events = {
 		# hold attendance until next-morning biometric sync has had time to arrive
 		"0 13 * * *": ["mtcpl.api.attendance_sync.set_attendance_cutoff"],
 		"30 * * * *": ["mtcpl.api.attendance_sync.reconcile_late_checkins"],
+		"0 9 * * *": ["mtcpl.api.attendance_review.send_pending_review_reminder"],
 	},
 }
 
@@ -287,6 +292,8 @@ fixtures = [
 					"Attendance-custom_short_leave_hours",
 					"Attendance-custom_short_leave_source",
 					"Attendance-custom_short_leave_application",
+					"Attendance-custom_needs_review",
+					"Attendance-custom_review_reason",
 				],
 			]
 		],

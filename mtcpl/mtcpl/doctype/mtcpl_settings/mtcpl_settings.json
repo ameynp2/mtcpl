@@ -1,0 +1,185 @@
+{
+ "actions": [],
+ "creation": "2026-10-25 12:00:00.000000",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "attendance_section",
+  "hold_attendance_for_late_checkins",
+  "reconcile_late_checkins",
+  "review_section",
+  "enable_attendance_review",
+  "review_missing_punch",
+  "review_short_hours",
+  "column_break_review",
+  "full_day_tolerance_minutes",
+  "min_punch_gap_seconds",
+  "double_tap_minutes",
+  "pending_section",
+  "enable_pending_review_reminder",
+  "reminder_after_days",
+  "reminder_role",
+  "column_break_pending",
+  "payroll_check",
+  "dashboard_section",
+  "employee_dashboard_as_landing_page"
+ ],
+ "fields": [
+  {
+   "fieldname": "attendance_section",
+   "fieldtype": "Section Break",
+   "label": "Late Biometric Check-ins"
+  },
+  {
+   "default": "1",
+   "description": "Daily at 1 PM, only treat shifts that ended before today as complete, so next-morning OUT punches are not marked Absent. Off: HRMS keeps its own cut-off.",
+   "fieldname": "hold_attendance_for_late_checkins",
+   "fieldtype": "Check",
+   "label": "Hold Attendance for Late Check-ins"
+  },
+  {
+   "default": "1",
+   "description": "Hourly, upgrade Absent / Half Day attendance when check-ins reached ERPNext after it was created. Off: standard HRMS never revisits a day.",
+   "fieldname": "reconcile_late_checkins",
+   "fieldtype": "Check",
+   "label": "Reconcile Late Check-ins"
+  },
+  {
+   "fieldname": "review_section",
+   "fieldtype": "Section Break",
+   "label": "Attendance Review"
+  },
+  {
+   "default": "0",
+   "description": "Irregular days are created as Draft Attendance with a review reason, and HR confirms the status and submits. Off: HRMS submits attendance automatically.",
+   "fieldname": "enable_attendance_review",
+   "fieldtype": "Check",
+   "label": "Create Draft Attendance for Irregular Days"
+  },
+  {
+   "default": "1",
+   "depends_on": "enable_attendance_review",
+   "description": "Only an IN or only an OUT punch for the day",
+   "fieldname": "review_missing_punch",
+   "fieldtype": "Check",
+   "label": "Review Missing IN / OUT"
+  },
+  {
+   "default": "1",
+   "depends_on": "enable_attendance_review",
+   "description": "Worked hours below the full-day hours (after tolerance), or a double-tap",
+   "fieldname": "review_short_hours",
+   "fieldtype": "Check",
+   "label": "Review Short Hours"
+  },
+  {
+   "fieldname": "column_break_review",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "30",
+   "depends_on": "enable_attendance_review",
+   "description": "Hours this close to the Shift Type's Half Day threshold count as a full day",
+   "fieldname": "full_day_tolerance_minutes",
+   "fieldtype": "Int",
+   "label": "Full Day Tolerance (Minutes)"
+  },
+  {
+   "default": "60",
+   "depends_on": "enable_attendance_review",
+   "description": "Punches closer together than this are treated as one (duplicate pushes from the device)",
+   "fieldname": "min_punch_gap_seconds",
+   "fieldtype": "Int",
+   "label": "Merge Punches Within (Seconds)"
+  },
+  {
+   "default": "2",
+   "depends_on": "enable_attendance_review",
+   "description": "IN and OUT closer than this is an accidental punch, not a worked day",
+   "fieldname": "double_tap_minutes",
+   "fieldtype": "Int",
+   "label": "Double-tap Window (Minutes)"
+  },
+  {
+   "fieldname": "pending_section",
+   "fieldtype": "Section Break",
+   "label": "Pending Review Follow-up",
+   "depends_on": "enable_attendance_review"
+  },
+  {
+   "default": "1",
+   "description": "Daily at 9 AM, email a list of draft attendance still waiting for HR",
+   "fieldname": "enable_pending_review_reminder",
+   "fieldtype": "Check",
+   "label": "Send Pending Review Reminder"
+  },
+  {
+   "default": "2",
+   "depends_on": "enable_pending_review_reminder",
+   "description": "Remind about drafts created at least this many days ago",
+   "fieldname": "reminder_after_days",
+   "fieldtype": "Int",
+   "label": "Remind After (Days)"
+  },
+  {
+   "default": "HR Manager",
+   "depends_on": "enable_pending_review_reminder",
+   "description": "Every enabled user with this role gets the reminder",
+   "fieldname": "reminder_role",
+   "fieldtype": "Link",
+   "label": "Send Reminder To Role",
+   "options": "Role"
+  },
+  {
+   "fieldname": "column_break_pending",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "Warn",
+   "description": "Draft attendance is not counted in salary. Warn: show a message on Payroll Entry. Block: stop Payroll Entry and Salary Slip while drafts exist in the period.",
+   "fieldname": "payroll_check",
+   "fieldtype": "Select",
+   "label": "Payroll Check",
+   "options": "Off\nWarn\nBlock"
+  },
+  {
+   "fieldname": "dashboard_section",
+   "fieldtype": "Section Break",
+   "label": "Employee Dashboard"
+  },
+  {
+   "default": "1",
+   "description": "Employees land on their My Dashboard page after login. Off: the standard desk home opens (the dashboard stays available from the search bar).",
+   "fieldname": "employee_dashboard_as_landing_page",
+   "fieldtype": "Check",
+   "label": "Open My Dashboard After Login"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "issingle": 1,
+ "links": [],
+ "modified": "2026-10-25 12:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "Mtcpl",
+ "name": "MTCPL Settings",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "email": 1,
+   "print": 1,
+   "read": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "read": 1,
+   "role": "HR Manager",
+   "write": 1
+  }
+ ],
+ "sort_field": "creation",
+ "sort_order": "DESC",
+ "states": []
+}
