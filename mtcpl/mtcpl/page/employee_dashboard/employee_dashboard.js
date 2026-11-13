@@ -169,7 +169,7 @@ class EmployeeDashboard {
 			return { cls: STATUS_CLASS[att.status] || "", label: this.status_label(att) };
 		}
 		if (leave) return { cls: "ed-leave", label: `${leave.leave_type}${leave.status === "Open" ? " (" + __("pending") + ")" : ""}` };
-		if (date in d.holidays) return { cls: "ed-holiday", label: d.holidays[date] || __("Holiday") };
+		if (date in d.holidays) return { cls: "ed-holiday", label: d.holidays[date] ? d.holidays[date] : __("Holiday") };
 		return { cls: "", label: "" };
 	}
 
@@ -302,7 +302,8 @@ class EmployeeDashboard {
 			.ed-day.ed-selected{box-shadow:0 0 0 2px var(--primary) inset}
 			.ed-present{background:var(--green-100,#e4f5e9)}.ed-absent{background:var(--red-100,#fde8e8)}
 			.ed-half{background:var(--yellow-100,#fdf6d8)}.ed-leave{background:var(--blue-100,#e3f0fd)}
-			.ed-holiday{background:var(--bg-light-gray)}
+			.ed-holiday{background:var(--orange-100,#ffefd9);border-left:3px solid var(--orange-500,#f59e0b)}
+			.ed-holiday .ed-daylabel{color:var(--orange-700,#b45309);font-weight:500}
 			.ed-pending{background:var(--bg-purple,#efe8fa);border-style:dashed}
 			i.ed-present,i.ed-absent,i.ed-half,i.ed-leave,i.ed-holiday,i.ed-pending{border:1px solid var(--border-color)}
 		</style>`).appendTo("head");

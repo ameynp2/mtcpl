@@ -125,7 +125,7 @@ def get_holidays(profile, start, end):
 		return {}
 
 	names = {
-		str(h.holiday_date): h.description
+		str(h.holiday_date): frappe.utils.strip_html(h.description or "").strip()
 		for h in frappe.get_all(
 			"Holiday",
 			filters={"parent": holiday_list, "holiday_date": ["between", [start, end]]},
